@@ -11,7 +11,8 @@ const SignUpuser=async (req,res)=>{
         const user = await userModel.create({
             email: req.body.email,
             password: hashPassword,
-            role: req.body.role
+            phoneno:req.body.phoneno,
+            location:req.body.location
         });
         res.status(201).json({ msg: "User created successfully", user: user });
     } catch (error) {
