@@ -1,46 +1,38 @@
-const express=require('express');
-require('dotenv').config();
-const PORT=process.env.PORT;
-const app=express();
-app.listen(PORT,()=>{
-    console.log(`server running at ${PORT}`)
-})
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
+const errorHandler = require("./middleware/errorHandling.js");
 
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-app.use(express.json())
-const cors=require('cors')
-app.use(cors())
+const port = process.env.PORT || 3000;
 
+const homeRoutes = require("./Routes/home.routes.js");
+const userRoutes = require("./Routes/user.routes.js");
+const donationRoutes = require("./Routes/donation.routes.js");
+const requestRoutes = require("./Routes/request.routes.js");
+const adminRoutes = require("./Routes/admin.routes.js");
+const volunteerRoutes = require("./Routes/volunteer.routes.js");
+const { validateToken } = require("./middleware/validateToken");
 
+mongoose
+  .connect("mongodb://127.0.0.1:27017/food-bank")
+  .then(() => console.log("Connected to DataBase successfully..."));
 
+// connecting api endpoint to routes
+app.use("/api/", homeRoutes);
+app.use("/api/auth", userRoutes);
+app.use("/api/donation", donationRoutes);
+app.use("/api/request", requestRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/volunteer", volunteerRoutes);
+app.use(validateToken);
 
-//Routes
-const userRoutes=require('./Routes/RoutesUser');
-app.use('/api',userRoutes)
+app.use(errorHandler);
 
-
-const adminRoutes=require('./Routes/RoutesAdmin');
-app.use('/api',adminRoutes);
-
-
-const donateRoutes=require('./Routes/RoutesDonate');
-app.use('/api',donateRoutes);
-
-
-const requestRoutes=require('./Routes/RoutesRequest');
-app.use('/api',requestRoutes);
-
-const volunteerRoutes=require('./Routes/RoutesVolunteer');
-app.use('/api',volunteerRoutes);
-
-
-
-
-//mongodb connection
-const mongoose=require('mongoose');
-mongoose.connect('mongodb://localhost:27017/anadhseva').then(()=>{
-    console.log("connection successful");
-})
-.catch(()=>{
-    console.log("connection failed")
-})
+app.listen(port, () => {
+  console.log(`Listening to port ${port}...`);
+});
