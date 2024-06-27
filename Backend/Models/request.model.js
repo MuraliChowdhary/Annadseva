@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const { Schema } = mongoose;
 const receiverRequestSchema = new mongoose.Schema({
     receiverName: {type: String, required: true},
     receiverId: { type: Schema.Types.ObjectId, ref: 'User', required: true },

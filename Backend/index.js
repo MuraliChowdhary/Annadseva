@@ -1,44 +1,38 @@
-const express = require('express');
-require('dotenv').config();
-const cors = require('cors');
-const mongoose = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
+// const errorHandler = require("./middleware/errorHandling.js");
 
-const PORT = process.env.PORT;
 const app = express();
-
-// Middleware
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-// MongoDB connection
-mongoose.connect('mongodb://localhost:27017/anadhseva', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => {
-    console.log("Connection successful");
-})
-.catch(() => {
-    console.log("Connection failed");
-});
+const port = process.env.PORT || 3000;
 
-// Routes
-const userRoutes = require('./Routes/RoutesUser');
-app.use('/api', userRoutes);
+const homeRoutes = require("./Routes/home.route.js");
+const userRoutes = require("./Routes/user.route.js");
+const donationRoutes = require("./Routes/donation.route.js");
+const requestRoutes = require("./Routes/request.route.js");
+const adminRoutes = require("./Routes/admin.route.js");
+const volunteerRoutes = require("./Routes/volunteer.route.js");
+// const { validateToken } = require("./middleware/validateToken");
 
-const adminRoutes = require('./Routes/RoutesAdmin');
-app.use('/api', adminRoutes);
+mongoose
+  .connect("mongodb://127.0.0.1:27017/food-bank")
+  .then(() => console.log("Connected to DataBase successfully..."));
 
-const donateRoutes = require('./Routes/RoutesDonate');
-app.use('/api', donateRoutes);
+// connecting api endpoint to routes
+app.use("/api/", homeRoutes);
+app.use("/api/auth", userRoutes);
+app.use("/api/donation", donationRoutes);
+app.use("/api/request", requestRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/volunteer", volunteerRoutes);
+// app.use(validateToken);
 
-const requestRoutes = require('./Routes/RoutesRequest');
-app.use('/api', requestRoutes);
+// app.use(errorHandler);
 
-const volunteerRoutes = require('./Routes/RoutesVolunteer');
-app.use('/api', volunteerRoutes);
-
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server running at ${PORT}`);
+app.listen(port, () => {
+  console.log(`Listening to port ${port}...`);
 });
