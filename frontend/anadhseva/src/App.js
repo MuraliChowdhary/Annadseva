@@ -1,32 +1,20 @@
-// src/App.js
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Home from './components/Home/Home';
-import RequestForm from './components/RequestForm.js/RequestForm'; // Corrected import path
+import RequestForm from './components/RequestForm/RequestForm';
 
 function App() {
-  const [isFormVisible, setIsFormVisible] = useState(false);
-
   return (
     <BrowserRouter>
-      <div className="App">
+      <div>
         <Routes>
-          <Route
-            path="/request"
-            element={<RequestForm setIsFormVisible={setIsFormVisible} />}
-          />
-          <Route
-            path="/"
-            element={
-              isFormVisible ? (
-                <RequestForm setIsFormVisible={setIsFormVisible} />
-              ) : (
-                <Home setIsFormVisible={setIsFormVisible} />
-              )
-            }
-          />
+          <Route path="/request" element={<RequestForm />} />
+          <Route path="/" element={<Home />} />
         </Routes>
+        <ToastContainer />
       </div>
     </BrowserRouter>
   );
