@@ -1,19 +1,12 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from './components/Header';
-import Home from './components/Home';
-import Contact from './components/Contact';
-import Aboutus from './components/Aboutus';
-import AdminDashboard from './components/Admindashboard';
-import Login from './components/Login';
-import Register from './components/Register';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import UserRegistration from './components/userRegistration';
 import UserTypeSelection from './components/UserTypeSelection';
 import VolunteerDashboard from './components/VolunteerDashBoard/volunteerDashboard';
 import Log from './components/Logs/log';
 
-const App = () => {
+function App() {
   return (
     <BrowserRouter>
       <div className="app">
@@ -34,6 +27,6 @@ const App = () => {
       </div>
     </BrowserRouter>
   );
-};
+}
 
 export default App;

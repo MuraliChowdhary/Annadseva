@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-// src/components/RequestForm.js
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -82,7 +70,9 @@ const RequestForm = () => {
 
   return (
     <div>
-      <button onClick={handleShow}>Add Request</button>
+      <button onClick={handleShow} className="btn btn-success mb-3">
+        Add Request
+      </button>
 
       {isVisible && (
         <div className="request-form-overlay">
@@ -112,7 +102,7 @@ const RequestForm = () => {
                   required
                 />
               </label>
-              <button type="submit">Submit Request</button>
+              <button type="submit" className="btn btn-success">Submit Request</button>
             </form>
           </div>
         </div>
