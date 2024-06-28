@@ -14,7 +14,7 @@ const transactionSchema = new mongoose.Schema(
         dloc: { type: String, required: true },
         status: {
             type: String,
-            enum: ["pending", "accepted", "failed", "completed"],
+            enum: ["pending", "taken", "completed"],
             default: "pending",
         },
     },
