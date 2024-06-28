@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-const errorHandler = require("./middleware/errorHandling.js");
+// const errorHandler = require("./middleware/errorHandling.js");
 
 const app = express();
 app.use(cors());
@@ -33,6 +33,7 @@ app.use(validateToken);
 
 app.use(errorHandler);
 
+// Start the server
 app.listen(port, () => {
-  console.log(`Listening to port ${port}...`);
+    console.log(`Proxy server listening at http://localhost:${port}`);
 });
