@@ -5,6 +5,7 @@ const adminAuth = (req, res, next) => {
       res.status(403);
       throw new Error("Unauthorized access");
     }
+    next()
   };
   
   module.exports = { adminAuth };
