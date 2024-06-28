@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const transactionSchema = new mongoose.Schema(
     {
-        donorName: { type: Schema.Types.ObjectId, ref: "User", required: true },
-        receiverName: { type: Schema.Types.ObjectId, ref: "User", required: true },
-        volunteerId: { type: Schema.Types.ObjectId, ref: "User" },
+        donorName: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+        receiverName: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+        volunteerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         donationId: {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "Donation",
             required: true,
         },

@@ -1,17 +1,18 @@
-const express = require("express");
-// const {
-//   getAllRequests,
-//   getRequest,
-//   postRequest,
-//   updateRequest,
-//   deleteRequest
-// } = require("../controllers/admin.controller");
-const { adminAuth } = require("../middleware/adminAuth");
+const express = require('express');
 const router = express.Router();
-const requestRoute = require('../controllers/request.controller');
-// Admin Routes
-router.use(adminAuth);
-// router.use("/:id").get(getRequest).put(updateRequest).delete(deleteRequest);
-// router.use("/").get(getAllRequests).post(postRequest);
-router.post('/request',requestRoute.createReceiverRequest);
+const { getAllRequests, getCompletedRequests, getFulfilledReceiverRequests, getvolunteeredRequests } = require('../controllers/request.controller');
+
+// Route to get all requests
+router.get('/', getAllRequests);
+
+// Route to get completed requests
+router.get('/donated', getCompletedRequests);
+
+// Route to get fulfilled receiver requests
+router.get('/received', getFulfilledReceiverRequests);
+
+// Route to get volunteered requests
+router.get('/volunteered', getvolunteeredRequests);
+
+
 module.exports = router;

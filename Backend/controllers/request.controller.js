@@ -15,7 +15,7 @@ const getAllRequests = async (req, res) => {
 
 const getCompletedRequests = async (req, res) => {
     try {
-        const requests = await Donation.find({ status: 'completed' });
+        const requests = await Donation.find({ status: "taken" });
         res.status(200).json(requests);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -24,27 +24,27 @@ const getCompletedRequests = async (req, res) => {
 
 const getFulfilledReceiverRequests = async (req, res) => {
     try {
-        const requests = await ReceiverRequest.find({ status: 'fulfilled' });
+        const requests = await ReceiverRequest.find({ status: { $in: ['taken', 'completed'] } });
         res.status(200).json(requests);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-router.get('/api/transactions/:status', async (req, res) => {
-    const status = req.params.status.split(',');
 
+const getvolunteeredRequests = async (req, res) => {
     try {
-        const transactions = await Transaction.find({ status: { $in: status } });
-        res.json(transactions);
+        const requests = await Transaction.find({ status: { $in: ['taken', 'completed'] } });
+        res.status(200).json(requests);
     } catch (error) {
-        res.status(500).send('Server Error');
+        res.status(500).json({ message: error.message });
     }
-});
+};
 
 
 
-module.exports = { getAllRequests, getCompletedRequests, getFulfilledReceiverRequests };
+
+module.exports = { getAllRequests, getCompletedRequests, getFulfilledReceiverRequests,getvolunteeredRequests };
 
 
 
