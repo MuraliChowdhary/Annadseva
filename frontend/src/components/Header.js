@@ -16,7 +16,7 @@ const Header = () => {
             </div>
             <nav>
                 <ul className={menuOpen ? 'show' : ''}>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/aboutus">About</a></li>
                     <li><a href="#">Services</a></li>
                     <li><a href="/contactus">Contact</a></li>
