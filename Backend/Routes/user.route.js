@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Admin Routes
 router.use(adminAuth);
-router.post("/login", loginUser);
-router.post("/register", registerUser);
+// router.post("/login", loginUser);
+// router.post("/register", registerUser);
 
 module.exports = router;
