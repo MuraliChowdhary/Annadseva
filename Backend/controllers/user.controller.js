@@ -1,6 +1,6 @@
-const userModel=require('../Models/user.model');
-const jwt=require('jsonwebtoken');
-const SignUpuser=async (req,res)=>{
+const userModel = require('../Models/user.model');
+const jwt = require('jsonwebtoken');
+const SignUpuser = async (req, res) => {
     try {
         const existingUser = await userModel.findOne({ email: req.body.email });
         if (existingUser) {
@@ -8,8 +8,8 @@ const SignUpuser=async (req,res)=>{
         }
         const user = await userModel.create({
             email: req.body.email,
-            phoneno:req.body.phoneno,
-            location:req.body.location
+            phoneno: req.body.phoneno,
+            location: req.body.location
         });
         res.status(201).json({ msg: "User created successfully", user: user });
     } catch (error) {
@@ -17,20 +17,20 @@ const SignUpuser=async (req,res)=>{
     }
 }
 
-const LoginUser=async (req,res)=>{
+const LoginUser = async (req, res) => {
 
-    try{
-        const email=req.body.email;
-        const password=req.body.password;
-        const user=await userModel.findOne({email:email});
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
+        const user = await userModel.findOne({ email: email });
         if (!validPass) return res.status(401).json({ message: "Invalid login credentials! Please check it." });
-            
-        let payload={email:user.email};
-        const token=jwt.sign(payload,"SecretKey",{expiresIn:'1h'})
-        res.status(200).json({token:token,email:email,password:password,role:user.role})
+
+        let payload = { email: user.email };
+        const token = jwt.sign(payload, "SecretKey", { expiresIn: '1h' })
+        res.status(200).json({ token: token, email: email, password: password, role: user.role })
     }
-    catch(error){
-        res.status(200).json({msg:"user login unsuccessful",error:error.message})
+    catch (error) {
+        res.status(200).json({ msg: "user login unsuccessful", error: error.message })
     }
 }
-module.exports={SignUpuser,LoginUser}
+module.exports = { SignUpuser, LoginUser }

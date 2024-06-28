@@ -13,7 +13,7 @@ import UserTypeSelection from './components/UserTypeSelection';
 import VolunteerActiveRequests from './components/VolunteerDashboard';
 import Donation from './components/Donation/Donation';
 
-const App = () => {
+function App() {
   return (
     <BrowserRouter>
       <div className="app">
@@ -34,6 +34,6 @@ const App = () => {
       </div>
     </BrowserRouter>
   );
-};
+}
 
 export default App;

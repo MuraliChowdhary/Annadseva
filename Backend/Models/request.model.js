@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+
 const receiverRequestSchema = new mongoose.Schema({
-    receiverName: {type: String, required: true},
+    receiverName: { type: String, required: true },
     receiverId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     loc: { type: String, required: true },
     foodItems: [{ type: String, required: true }],

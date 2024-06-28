@@ -9,7 +9,7 @@ const donationSchema = new mongoose.Schema(
     quantity: { type: Number, required: true },
     status: {
       type: String,
-      enum: ["pending", "completed"],
+      enum: ["pending", "taken", "completed"],
       default: "pending",
     },
     shelfLife: { type: Number, required: true },
