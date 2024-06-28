@@ -9,6 +9,9 @@ import Login from './components/Login';
 import Register from './components/Register';
 import VolunteerActiveRequests from './components/VolunteerDashboard';
 import './App.css';
+import UserRegistration from './components/userRegistration';
+import UserTypeSelection from './components/UserTypeSelection';
+import VolunteerDashboard from './components/VolunteerDashBoard/volunteerDashboard';
 
 const App = () => {
   return (
@@ -22,9 +25,12 @@ const App = () => {
           <Route path="/aboutus" element={<Aboutus/>} />
           <Route path="/contactus" element={<Contact/>} />
           <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
+          <Route path="/register" element={<UserRegistration/>} />
           <Route path="/admin" element={<AdminDashboard/>} />
+          <Route path="/user-type-selection" element={<UserTypeSelection />} />
+          <Route path="/volunteer/dashboard" element={<VolunteerDashboard />} />
           <Route path="/volunteer" element={<VolunteerActiveRequests/>} />
+
         </Routes>
       </div>
     </BrowserRouter>
