@@ -13,16 +13,16 @@ const Log = () => {
         let endpoint;
         switch (type) {
             case 'donor':
-                endpoint = 'http://localhost:9000/api/completed';
+                endpoint = 'http://localhost:9000/api/request/donated';
                 break;
             case 'receiver':
-                endpoint = 'http://localhost:9000/api/fulfilled';
+                endpoint = 'http://localhost:9000/api/request/received';
                 break;
             case 'volunteer':
-                endpoint = 'http://localhost:9000/api/accepted';
+                endpoint = 'http://localhost:9000/api/request/volunteered';
                 break;
             default:
-                endpoint = 'http://localhost:9000/api/completed';
+                endpoint = 'http://localhost:9000/api/request/donated';
                 break;
         }
 
@@ -40,7 +40,7 @@ const Log = () => {
 
     return (
         <div>
-            <button onClick={logHistory}>Log History</button>
+            <h1>Log History</h1>
             <select value={type} onChange={(e) => setType(e.target.value)}>
                 <option value="donor">Donor</option>
                 <option value="receiver">Receiver</option>
@@ -50,10 +50,18 @@ const Log = () => {
             <ul>
                 {requests.map((request) => (
                     <li key={request._id}>
-                        {request.donarName || request.receiverName || request.volunteerId}: {request.loc}
+                        {request.donarName ? (
+                            <span> {request.donarName}</span>
+                        ) : request.receiverName ? (
+                            <span> {request.receiverName}</span>
+                        ) : (
+                            <span>Volunteer: {request.volunteerId} - Donor: {request.donarName} - Receiver: {request.receiverName}</span>
+                        )}: {request.loc} - Status: {request.status}
                     </li>
                 ))}
             </ul>
+
+
         </div>
     );
 };
