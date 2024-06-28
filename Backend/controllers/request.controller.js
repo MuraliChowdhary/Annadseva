@@ -31,17 +31,17 @@ const getFulfilledReceiverRequests = async (req, res) => {
     }
 };
 
-const getAcceptedRequests = async (req, res) => {
+router.get('/api/transactions/:status', async (req, res) => {
+    const status = req.params.status.split(',');
+
     try {
-        const transactions = await Transaction.find({
-            status: { $in: ['accepted', 'completed'] }
-        });
+        const transactions = await Transaction.find({ status: { $in: status } });
         res.json(transactions);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching transactions', error });
+        res.status(500).send('Server Error');
     }
-};
+});
 
 
 
-module.exports = { getAllRequests, getCompletedRequests, getFulfilledReceiverRequests, getAcceptedRequests };
+module.exports = { getAllRequests, getCompletedRequests, getFulfilledReceiverRequests };
