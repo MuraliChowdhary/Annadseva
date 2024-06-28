@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const donationSchema = new mongoose.Schema(
   {
-    donorId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    donorId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     loc: { type: String, required: true },
     donarName: { type: String, required: true },
     foodItems: [{ type: String, required: true }],
@@ -13,7 +13,7 @@ const donationSchema = new mongoose.Schema(
       default: "pending",
     },
     shelfLife: { type: Number, required: true },
-    receiverId: { type: Schema.Types.ObjectId, ref: "User" },
+    receiverId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     misc: { type: Boolean, default: false },
   },
   { timestamps: true }
