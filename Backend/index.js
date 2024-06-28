@@ -19,8 +19,8 @@ const volunteerRoutes = require("./Routes/volunteer.route.js");
 const { validateToken } = require("./middleware/validateToken");
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/food-bank")
-  .then(() => console.log("Connected to DataBase successfully..."));
+    .connect("mongodb://127.0.0.1:27017/food-bank")
+    .then(() => console.log("Connected to DataBase successfully..."));
 
 // connecting api endpoint to routes
 app.use("/api/", homeRoutes);
