@@ -132,7 +132,7 @@ import './RequestForm.css'; // Import the CSS file
 const RequestForm = () => {
   const [formData, setFormData] = useState({
     receiverName: 'john',
-    receiverId: '60d5f60b8f634d3f0c8b4567',
+    receiverId: '60d5f60b8f634d3f0c8b4568',
     loc: 'hyd',
     foodItems: [],
     quantity: 0,
@@ -181,7 +181,8 @@ const RequestForm = () => {
       setSubmitted(true); // Trigger useEffect to reset form and close modal
     } catch (error) {
       console.error('Error submitting request', error);
-      toast.error('Error submitting request');
+      toast.error(error.response.data.message);
+      setSubmitted(true);
     }
   };
 
