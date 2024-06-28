@@ -1,8 +1,14 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const userModel = require('../Models/user.model.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const SignUpuser = async (req, res) => {
+=======
+const userModel=require('../Models/user.model');
+const jwt=require('jsonwebtoken');
+const SignUpuser=async (req,res)=>{
+>>>>>>> origin/master
 =======
 const userModel=require('../Models/user.model');
 const jwt=require('jsonwebtoken');
@@ -14,6 +20,7 @@ const SignUpuser=async (req,res)=>{
             return res.status(400).json({ msg: "Email already exists, please try again!" });
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         const hashPassword = await bcrypt.hash(req.body.password, 10);
         const user = await userModel.create({
             email: req.body.email,
@@ -21,10 +28,15 @@ const SignUpuser=async (req,res)=>{
             phoneno: req.body.phoneno,
             location: req.body.location
 =======
+=======
+>>>>>>> origin/master
         const user = await userModel.create({
             email: req.body.email,
             phoneno:req.body.phoneno,
             location:req.body.location
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
         });
         res.status(201).json({ msg: "User created successfully", user: user });
@@ -33,6 +45,7 @@ const SignUpuser=async (req,res)=>{
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -58,6 +71,8 @@ const LoginUser = async (req, res) => {
 }
 module.exports = { SignUpuser, LoginUser }
 =======
+=======
+>>>>>>> origin/master
 const LoginUser=async (req,res)=>{
 
     try{
@@ -74,5 +89,9 @@ const LoginUser=async (req,res)=>{
         res.status(200).json({msg:"user login unsuccessful",error:error.message})
     }
 }
+<<<<<<< HEAD
+module.exports={SignUpuser,LoginUser}
+>>>>>>> origin/master
+=======
 module.exports={SignUpuser,LoginUser}
 >>>>>>> origin/master
