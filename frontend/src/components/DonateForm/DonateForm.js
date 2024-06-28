@@ -6,7 +6,6 @@ import { FaCamera, FaClock, FaMapMarkerAlt, FaUtensils, FaWeight } from 'react-i
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 const DonationForm = () => {
   const [foodItems, setFoodItems] = useState('');
   const [quantity, setQuantity] = useState('');
@@ -14,6 +13,13 @@ const DonationForm = () => {
   const [location, setLocation] = useState('');
   const [picture, setPicture] = useState(null);
   const [showModal, setShowModal] = useState(false);
+
+  // Dummy user data (for illustration, replace with actual user data from authentication context)
+  const user = {
+    donorId: '123456', // Example donorId
+    donorName: 'John Doe', // Example donorName
+    loc: 'Some Location', // Example loc
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +29,11 @@ const DonationForm = () => {
     formData.append('shelfLife', shelfLife);
     formData.append('location', location);
     formData.append('picture', picture);
+    
+    // Add user-specific data
+    formData.append('donorId', user.donorId);
+    formData.append('donorName', user.donorName);
+    formData.append('loc', user.loc);
 
     try {
       const response = await axios.post('http://localhost:4000/api/donations', formData, {
@@ -151,7 +162,6 @@ const DonationForm = () => {
         draggable
         pauseOnHover
       />
-
     </div>
   );
 };

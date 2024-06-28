@@ -11,7 +11,7 @@ app.use(express.json());
 const port = process.env.PORT || 3000;
 
 const homeRoutes = require("./Routes/home.route.js");
-const userRoutes = require("./Routes/user.route.js");
+// const userRoutes = require("./Routes/user.route.js");
 const donationRoutes = require("./Routes/donation.route.js");
 const requestRoutes = require("./Routes/request.route.js");
 const adminRoutes = require("./Routes/admin.route.js");
