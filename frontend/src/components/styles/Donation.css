@@ -1,0 +1,45 @@
+.donation .instant-donate {
+    border: #28a745;
+    background-color: #e4f5e8;
+    width: 98vw;
+    padding: 10px;
+    margin: 2px;
+    display: flex;
+}
+.instant-donate .green-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.instant-donate .green-button:hover {
+    background-color: #1d7a33;
+}
+.instant-donate .instant-donate-button {
+    margin-left: auto;
+}
+.donation .donation-main {
+    display: flex;
+}
+.donation .requests-map {
+    height: 75vh;
+    width: 60%;
+    display: inline-block;
+}
+.donation .donation-requests {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    /*  */
+}
+.donation-requests {
+    overflow-y: scroll;
+    height: 75vh;
+}
+.donation .donation-request {
+    padding: 20px;
+}

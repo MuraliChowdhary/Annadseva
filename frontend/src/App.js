@@ -6,11 +6,12 @@ import Contact from './components/Contact';
 import Aboutus from './components/Aboutus';
 import AdminDashboard from './components/Admindashboard';
 import Login from './components/Login';
-import Register from './components/Register';
+
 import './App.css';
 import UserRegistration from './components/userRegistration';
 import UserTypeSelection from './components/UserTypeSelection';
-import VolunteerDashboard from './components/VolunteerDashBoard/volunteerDashboard';
+import VolunteerActiveRequests from './components/VolunteerDashboard';
+import Donation from './components/Donation/Donation';
 
 const App = () => {
   return (
@@ -27,7 +28,8 @@ const App = () => {
           <Route path="/register" element={<UserRegistration/>} />
           <Route path="/admin" element={<AdminDashboard/>} />
           <Route path="/user-type-selection" element={<UserTypeSelection />} />
-          <Route path="/volunteer/dashboard" element={<VolunteerDashboard />} />
+          <Route path="/volunteer/dashboard" element={<VolunteerActiveRequests />} />
+          <Route path="/donate" element={<Donation/>}/>
         </Routes>
       </div>
     </BrowserRouter>
