@@ -1,4 +1,4 @@
-const userModel=require('../Models/ModelUserSchema');
+const userModel=require('../Models/user.model');
 const jwt=require('jsonwebtoken');
 const bcrypt=require('bcrypt');
 const SignUpuser=async (req,res)=>{

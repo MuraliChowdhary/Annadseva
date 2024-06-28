@@ -10,12 +10,12 @@ app.use(express.json());
 
 const port = process.env.PORT || 3000;
 
-const homeRoutes = require("./Routes/home.routes.js");
-const userRoutes = require("./Routes/user.routes.js");
-const donationRoutes = require("./Routes/donation.routes.js");
-const requestRoutes = require("./Routes/request.routes.js");
-const adminRoutes = require("./Routes/admin.routes.js");
-const volunteerRoutes = require("./Routes/volunteer.routes.js");
+const homeRoutes = require("./Routes/home.route.js");
+const userRoutes = require("./Routes/user.route.js");
+const donationRoutes = require("./Routes/donation.route.js");
+const requestRoutes = require("./Routes/request.route.js");
+const adminRoutes = require("./Routes/admin.route.js");
+const volunteerRoutes = require("./Routes/volunteer.route.js");
 const { validateToken } = require("./middleware/validateToken");
 
 mongoose
