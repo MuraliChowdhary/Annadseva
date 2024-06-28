@@ -5,6 +5,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { FaCamera, FaClock, FaMapMarkerAlt, FaUtensils, FaWeight } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './DonateForm.css';
 
 const DonationForm = () => {
   const [foodItems, setFoodItems] = useState('');
@@ -59,19 +60,19 @@ const DonationForm = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container custom-modal">
       <Button onClick={() => setShowModal(true)} className="mb-3" style={styles.greenButton}>
         <FaUtensils className="me-2" /> Donate Food Items
       </Button>
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
+      <Modal show={showModal} onHide={() => setShowModal(false)} dialogClassName="custom-modal">
+        <Modal.Header closeButton >
           <Modal.Title>Donate Food Items</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="row">
-            <div className="col-md-8" style={styles.formContainer}>
-              <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} style={styles.form}>
+            <div className="row">
+              <div className="col-md-6">
                 <div className="mb-3">
                   <label className="form-label">
                     <FaUtensils className="me-2" />
@@ -82,7 +83,6 @@ const DonationForm = () => {
                     value={foodItems}
                     onChange={(e) => setFoodItems(e.target.value)}
                     className="form-control"
-                    style={{ width: '100%' }} // Adjust width of input
                     required
                   />
                 </div>
@@ -96,7 +96,6 @@ const DonationForm = () => {
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
                     className="form-control"
-                    style={{ width: '100%' }} // Adjust width of input
                     required
                   />
                 </div>
@@ -110,7 +109,6 @@ const DonationForm = () => {
                     value={shelfLife}
                     onChange={(e) => setShelfLife(e.target.value)}
                     className="form-control"
-                    style={{ width: '100%' }} // Adjust width of input
                     required
                   />
                 </div>
@@ -124,7 +122,6 @@ const DonationForm = () => {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     className="form-control"
-                    style={{ width: '100%' }} // Adjust width of input
                     required
                   />
                 </div>
@@ -137,16 +134,22 @@ const DonationForm = () => {
                     type="file"
                     onChange={(e) => setPicture(e.target.files[0])}
                     className="form-control"
-                    style={{ width: '100%' }} // Adjust width of input
                     required
                   />
                 </div>
-                <Button type="submit" className="btn btn-success">
+                <Button type="submit" className="btn btn-success mt-3">
                   Submit Donation
                 </Button>
-              </form>
+              </div>
+              <div className="col-md-6">
+                <div style={styles.mapBox}>
+                  <p style={styles.mapPlaceholderText}>
+                    Placeholder for Map Component
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          </form>
         </Modal.Body>
       </Modal>
 
@@ -167,13 +170,25 @@ const DonationForm = () => {
 };
 
 const styles = {
-  formContainer: {
-    marginRight: '20px',
-  },
   greenButton: {
     backgroundColor: '#28a745',
     borderColor: '#28a745',
   },
+  form: {
+    minWidth: '400px',
+  },
+  mapBox: {
+    height: '400px',
+    border: '1px solid #ccc',
+    marginTop: '20px',
+    backgroundColor: '#fff',
+  },
+  mapPlaceholderText: {
+    textAlign: 'center',
+    paddingTop: '150px',
+    fontSize: '18px',
+    color: '#999'
+  }
 };
 
 export default DonationForm;
