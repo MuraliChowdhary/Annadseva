@@ -6,7 +6,7 @@ const receiverRequestSchema = new mongoose.Schema({
     loc: { type: String, required: true },
     foodItems: [{ type: String, required: true }],
     quantity: { type: Number, required: true },
-    status: { type: String, enum: ['open', 'fulfilled'], default: 'open' }
+    status: { type: String, enum: ['pending', 'taken', 'complete'], default: 'pending' }
 }, { timestamps: true });
 
 module.exports = mongoose.model('ReceiverRequest', receiverRequestSchema);
