@@ -1,82 +1,78 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './login.css'; // Ensure this CSS file is imported for styling
+import axios from 'axios';
+import './styles/Login.css'; // Assuming you store the CSS in Auth.css
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
-  const [isOtpSent, setIsOtpSent] = useState(false);
-  const [message, setMessage] = useState('');
-  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpSuccessMessage, setOtpSuccessMessage] = useState('');
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleEmailSubmit = async (e) => {
-    e.preventDefault();
+  const handleSendOtp = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/otp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-      if (response.ok) {
-        setIsOtpSent(true);
-        setMessage('OTP sent');
-      } else {
-        alert('Error sending OTP');
-      }
+      await axios.post('http://localhost:5000/api/auth/send-otp', { email });
+      setOtpSent(true);
+      setOtpSuccessMessage('OTP has been sent to your email.');
     } catch (error) {
-      console.error('Error:', error);
-      alert('Error sending OTP');
+      if (error.response && error.response.data) {
+        setErrorMessage(error.response.data);
+      } else {
+        setErrorMessage('Something went wrong. Please try again.');
+      }
+      console.error(error);
     }
   };
 
-  const handleOtpSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/api/otpverify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, otp }),
-      });
-      if (response.ok) {
-        navigate('/user-type-selection');
-      } else {
-        alert('Invalid OTP');
-      }
+      await axios.post('http://localhost:5000/api/auth/login', { email, otp });
+      alert('Login successful.');
+      window.location.href = '/'; // Redirect to home page or dashboard
     } catch (error) {
-      console.error('Error:', error);
-      alert('Error validating OTP');
+      if (error.response && error.response.data) {
+        setErrorMessage(error.response.data); // Set error message from server response
+      } else {
+        setErrorMessage('Something went wrong. Please try again.'); // Fallback error message
+      }
+      console.error(error); // Log the error for debugging
     }
   };
 
   return (
     <div className="login-form-container">
-      {!isOtpSent ? (
-        <form onSubmit={handleEmailSubmit} className="login-form">
-          <h2>Login</h2>
-          <label>
-            Email:
-            <input type="email" placeholder='Enter Your Email' name="email" value={email} onChange={handleEmailChange} required />
-          </label>
-          <button type="submit" className="login-button">Login</button>
-        </form>
-      ) : (
-        <form onSubmit={handleOtpSubmit} className="otp-form">
-          <label>
-            Enter OTP:
-            <input type="text" name="otp" value={otp} onChange={(e) => setOtp(e.target.value)} required />
-          </label>
-          <button type="submit" className="otp-button">Submit OTP</button>
-        </form>
-      )}
-      {message && <p className="message">{message}</p>}
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2>Login</h2>
+        <label>
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <button type="button" onClick={handleSendOtp}>
+            Send OTP
+          </button>
+        </label>
+        {otpSent && (
+          <>
+            <label>
+              OTP:
+              <input
+                type="text"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                required
+              />
+            </label>
+            <p style={{ color: 'green' }}>{otpSuccessMessage}</p>
+          </>
+        )}
+        <button type="submit">Login</button>
+      </form>
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   );
 };
