@@ -16,24 +16,27 @@ const donationRoutes = require("./Routes/donation.route.js");
 const requestRoutes = require("./Routes/request.route.js");
 const adminRoutes = require("./Routes/admin.route.js");
 const volunteerRoutes = require("./Routes/volunteer.route.js");
-const { validateToken } = require("./middleware/validateToken");
+const { validateToken } = require("./middleware/tokenvalidation");
+const SendRequestsRoutes = require("./Routes/sendRequests.route.js");
 
 mongoose
     .connect("mongodb://127.0.0.1:27017/food-bank")
     .then(() => console.log("Connected to DataBase successfully..."));
 
-// connecting api endpoint to routes
+// Connecting API endpoints to routes
+
 app.use("/api/", homeRoutes);
 app.use("/api/auth", userRoutes);
-app.use("/api/donation", donationRoutes);
-app.use("/api/request", requestRoutes);
-app.use("/api/admin", adminRoutes);
-app.use("/api/volunteer", volunteerRoutes);
-app.use(validateToken);
+
+// Apply validateToken middleware to the routes that require authentication
+app.use("/api/donation", validateToken, donationRoutes);
+app.use("/api/request", validateToken, requestRoutes);
+app.use("/api/admin", validateToken, adminRoutes);
+app.use("/api/volunteer", validateToken, volunteerRoutes);
 
 app.use(errorHandler);
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Proxy server listening at http://localhost:${port}`);
+  console.log(`Proxy server listening at http://localhost:${port}`);
 });
