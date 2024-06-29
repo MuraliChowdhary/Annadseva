@@ -6,7 +6,6 @@ const {
 const { adminAuth } = require("../middleware/adminAuth");
 const router = express.Router();
 
-router.get("/donation", getDonation);
-router.post("/donation", adminAuth, postDonation); // Example of applying middleware
+router.post("/", postDonation);
 
 module.exports = router;

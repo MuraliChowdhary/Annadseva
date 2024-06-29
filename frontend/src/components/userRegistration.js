@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './UserRegistration.css'; // Ensure this CSS file is imported for styling
+import './styles/UserRegistration.css'; // Ensure this CSS file is imported for styling
 
 const UserRegistration = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +24,7 @@ const UserRegistration = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+         
         },
         body: JSON.stringify(formData),
       });

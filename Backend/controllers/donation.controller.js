@@ -1,7 +1,7 @@
 const errorHandler = require("express-async-handler");
 const Donation = require("../Models/donation.model");
 const ReceiverRequest = require("../Models/request.model");
-const Transaction = require("../Models/transaction.model");
+// const Transaction = require("../Models/transaction.model");
 
 // Post a donation to a specific receiver request
 const postDonation = errorHandler(async (req, res) => {

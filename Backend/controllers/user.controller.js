@@ -35,14 +35,12 @@ const LoginUser = async (req, res) => {
 
     let payload = { email: user.email };
     const token = jwt.sign(payload, "SecretKey", { expiresIn: "1h" });
-    res
-      .status(200)
-      .json({
-        token: token,
-        email: email,
-        password: password,
-        role: user.role,
-      });
+    res.status(200).json({
+      token: token,
+      email: email,
+      password: password,
+      role: user.role,
+    });
   } catch (error) {
     res
       .status(200)
