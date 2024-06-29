@@ -6,12 +6,17 @@ import Contact from './components/Contact';
 import Aboutus from './components/Aboutus';
 import AdminDashboard from './components/Admindashboard';
 import Login from './components/Login';
-
+import Homepage from './components/Homepage';
+import VolunteerActiveRequests from './components/VolunteerDashboard';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import UserRegistration from './components/userRegistration';
 import UserTypeSelection from './components/UserTypeSelection';
-import VolunteerActiveRequests from './components/VolunteerDashboard';
-import Donation from './components/Donation/Donation';
+import VolunteerDashboard from './components/VolunteerDashBoard/volunteerDashboard';
+import Log from './components/Logs/log';
+import Donate from "./components/Donate";
+
 
 function App() {
   return (
@@ -20,16 +25,18 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-    
+          <Route path="/homepage" element={<Homepage/>} />
     
           <Route path="/aboutus" element={<Aboutus/>} />
-          <Route path="/contact" element={<Contact/>} />
+          <Route path="/contactus" element={<Contact/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<UserRegistration/>} />
           <Route path="/admin" element={<AdminDashboard/>} />
           <Route path="/user-type-selection" element={<UserTypeSelection />} />
-          <Route path="/volunteer/dashboard" element={<VolunteerActiveRequests />} />
-          <Route path="/donate" element={<Donation/>}/>
+          <Route path="/volunteer/dashboard" element={<VolunteerDashboard />} />
+          <Route path="/volunteer" element={<VolunteerActiveRequests/>} />
+          <Route path="/donate" element={<Donate />} />
+          <Route path="/log" element={<Log />} />
         </Routes>
       </div>
     </BrowserRouter>
