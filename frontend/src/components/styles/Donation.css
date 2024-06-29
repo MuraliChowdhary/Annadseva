@@ -1,3 +1,6 @@
+.donation {
+    margin: 0;
+}
 .donation .instant-donate {
     border: #28a745;
     background-color: #e4f5e8;
@@ -33,12 +36,18 @@
 .donation .donation-requests {
     display: flex;
     flex-direction: column;
-    margin-left: auto;
-    /*  */
 }
 .donation-requests {
+    float: right;
+    max-width: 600px;
+    width: 600px;
+    align-items: center;
     overflow-y: scroll;
-    height: 75vh;
+    height: 70vh;
+}
+.donation .map {
+    height: 70vh;
+    display: inline-block;
 }
 .donation .donation-request {
     padding: 20px;
