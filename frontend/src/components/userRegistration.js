@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './styles/UserRegistration.css'; // Ensure this CSS file is imported for styling
+import './UserRegistration.css'; // Ensure this CSS file is imported for styling
 
 const UserRegistration = () => {
   const [formData, setFormData] = useState({
@@ -20,11 +20,10 @@ const UserRegistration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/otp/send-otp', {
+      const response = await fetch('http://localhost:3001/api/otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-         
         },
         body: JSON.stringify(formData),
       });
@@ -42,7 +41,7 @@ const UserRegistration = () => {
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/otp/validate-otp', {
+      const response = await fetch('http://localhost:3001/api/otpverify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

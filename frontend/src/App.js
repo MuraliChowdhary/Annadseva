@@ -36,16 +36,6 @@ function App() {
           <Route path="/volunteer/dashboard" element={<VolunteerDashboard />} />
           <Route path="/volunteer" element={<VolunteerActiveRequests/>} />
           <Route path="/donate" element={<Donate />} />
-
-
-
-          <Route path="/aboutus" element={<Aboutus />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<UserRegistration />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/user-type-selection" element={<UserTypeSelection />} />
-          <Route path="/volunteer/dashboard" element={<VolunteerDashboard />} />
           <Route path="/log" element={<Log />} />
         </Routes>
       </div>

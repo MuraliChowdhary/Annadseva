@@ -8,7 +8,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
+
+const otpRoutes = require('./Routes/otpRoutes'); // Import the OTP routes
+const validateOTP = require('./Routes/validateRoute'); // Import the OTP verification routes
 
 const homeRoutes = require("./Routes/home.route.js");
 // const userRoutes = require("./Routes/user.route.js");
@@ -27,6 +30,9 @@ mongoose
 
 app.use("/api/", homeRoutes);
 app.use("/api/auth", userRoutes);
+
+app.use('/api/otp', otpRoutes);
+app.use('/api/otpVerify', validateOTP);
 
 // Apply validateToken middleware to the routes that require authentication
 app.use("/api/donation", validateToken, donationRoutes);
