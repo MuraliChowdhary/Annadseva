@@ -2,10 +2,11 @@ import React from 'react';
 import './styles/Contact.css';
 
 const Contact = () => {
-    function send(){
+    function send() {
         alert("Thank you for your message");
         window.location.href = '/';
     }
+
     return (
         <div className="contact">
             <h2>Get in Touch</h2>
@@ -22,15 +23,15 @@ const Contact = () => {
                 <div className="contact-info">
                     <div className="contact-item">
                         <i className="icon home-icon"></i>
-                        <p>Buttonwood, California.<br />Rosemead, CA 91770</p>
+                        <p>Anadh Seva organization, Kukatpally.<br />Hyderabad, 501510</p>
                     </div>
                     <div className="contact-item">
                         <i className="icon phone-icon"></i>
-                        <p>+1 253 565 2365<br />Mon to Fri 9am to 6pm</p>
+                        <p>9867543210<br />Mon to Fri 9am to 6pm</p>
                     </div>
                     <div className="contact-item">
                         <i className="icon email-icon"></i>
-                        <p>support@colorlib.com<br />Send us your query anytime!</p>
+                        <p>support@anadhseva.com<br />Send us your query anytime!</p>
                     </div>
                 </div>
             </div>

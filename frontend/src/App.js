@@ -6,7 +6,7 @@ import Contact from './components/Contact';
 import Aboutus from './components/Aboutus';
 import AdminDashboard from './components/Admindashboard';
 import Login from './components/Login';
-import Register from './components/Register';
+import Homepage from './components/Homepage';
 import VolunteerActiveRequests from './components/VolunteerDashboard';
 import './App.css';
 import UserRegistration from './components/userRegistration';
@@ -20,7 +20,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-    
+          <Route path="/homepage" element={<Homepage/>} />
     
           <Route path="/aboutus" element={<Aboutus/>} />
           <Route path="/contactus" element={<Contact/>} />
