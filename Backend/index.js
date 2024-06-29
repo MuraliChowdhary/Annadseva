@@ -11,7 +11,7 @@ app.use(express.json());
 const port = process.env.PORT || 3000;
 
 const homeRoutes = require("./Routes/home.route.js");
-const userRoutes = require("./Routes/user.route.js");
+// const userRoutes = require("./Routes/user.route.js");
 const donationRoutes = require("./Routes/donation.route.js");
 const requestRoutes = require("./Routes/request.route.js");
 const adminRoutes = require("./Routes/admin.route.js");
@@ -19,8 +19,8 @@ const volunteerRoutes = require("./Routes/volunteer.route.js");
 const { validateToken } = require("./middleware/validateToken");
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/food-bank")
-  .then(() => console.log("Connected to DataBase successfully..."));
+    .connect("mongodb://127.0.0.1:27017/food-bank")
+    .then(() => console.log("Connected to DataBase successfully..."));
 
 // connecting api endpoint to routes
 app.use("/api/", homeRoutes);
