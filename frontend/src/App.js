@@ -11,6 +11,7 @@ import "./App.css";
 import UserRegistration from "./components/userRegistration";
 import UserTypeSelection from "./components/UserTypeSelection";
 import VolunteerDashboard from "./components/VolunteerDashboard";
+import Donate from "./components/Donate";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/user-type-selection" element={<UserTypeSelection />} />
           <Route path="/volunteer/dashboard" element={<VolunteerDashboard />} />
+          <Route path="/donate" element={<Donate />} />
         </Routes>
       </div>
     </BrowserRouter>
