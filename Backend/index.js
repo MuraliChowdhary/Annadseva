@@ -1,7 +1,8 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
+const errorHandler = require("./middleware/errorHandling.js");
 
 const app = express();
 app.use(cors());
@@ -12,15 +13,36 @@ const port = process.env.PORT || 3001;
 const otpRoutes = require('./Routes/otpRoutes'); // Import the OTP routes
 const validateOTP = require('./Routes/validateRoute'); // Import the OTP verification routes
 
-mongoose
-  .connect('mongodb://127.0.0.1:27017/food-bank', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to DataBase successfully...'))
-  .catch(err => console.error('Database connection error:', err));
+const homeRoutes = require("./Routes/home.route.js");
+// const userRoutes = require("./Routes/user.route.js");
+const donationRoutes = require("./Routes/donation.route.js");
+const requestRoutes = require("./Routes/request.route.js");
+const adminRoutes = require("./Routes/admin.route.js");
+const volunteerRoutes = require("./Routes/volunteer.route.js");
+const { validateToken } = require("./middleware/tokenvalidation");
+const SendRequestsRoutes = require("./Routes/sendRequests.route.js");
 
-// Connecting API endpoint to routes
+mongoose
+    .connect("mongodb://127.0.0.1:27017/food-bank")
+    .then(() => console.log("Connected to DataBase successfully..."));
+
+// Connecting API endpoints to routes
+
+app.use("/api/", homeRoutes);
+app.use("/api/auth", userRoutes);
+
 app.use('/api/otp', otpRoutes);
 app.use('/api/otpVerify', validateOTP);
 
+// Apply validateToken middleware to the routes that require authentication
+app.use("/api/donation", validateToken, donationRoutes);
+app.use("/api/request", validateToken, requestRoutes);
+app.use("/api/admin", validateToken, adminRoutes);
+app.use("/api/volunteer", validateToken, volunteerRoutes);
+
+app.use(errorHandler);
+
+// Start the server
 app.listen(port, () => {
-  console.log(`Listening to port ${port}...`);
+  console.log(`Proxy server listening at http://localhost:${port}`);
 });
