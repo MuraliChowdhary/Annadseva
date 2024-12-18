@@ -1,13 +1,15 @@
 const Otp = require('../models/otp.model');
 const generateOtp = require('../utils/generateOtp');
-const sendEmail = require('../utils/sendEmail');
+const {sendEmail} = require('../utils/sendEmail');
 const { hashData, verifyHashedData } = require('../utils/hashData');
-const { AUTH_EMAIL } = process.env;
+const validator = require('validator'); // You might need to install it with npm install validator
 
+const { AUTH_EMAIL } = process.env;
+ 
 const sendOtp = async ({ email }) => {
   try {
-    if (!email) {
-      throw new Error("Provided invalid credentials");
+    if (!email || !validator.isEmail(email)) {
+      throw new Error("Invalid email address provided");
     }
 
     await Otp.deleteOne({ email });
@@ -85,4 +87,4 @@ const deleteOtp = async (req, res) => {
   }
 };
 
-module.exports = { sendOtp, verifyOTP };
+module.exports = { sendOtp, verifyOTP,deleteOtp };

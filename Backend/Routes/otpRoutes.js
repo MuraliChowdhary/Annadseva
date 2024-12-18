@@ -5,7 +5,8 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
   try {
-    const { email } = req.body;
+    const  {email}  = req.body;
+    console.log(email)
     const result = await sendOtp({ email });
     res.status(200).json(result);
   } catch (error) {

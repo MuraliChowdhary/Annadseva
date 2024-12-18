@@ -1,50 +1,48 @@
-const userModel = require("../Models/user.model");
-const jwt = require("jsonwebtoken");
-const SignUpuser = async (req, res) => {
+const User = require("../Models/user.model");
+const { sendOtp, verifyOTP } = require('../contollers/otp.controller'); // Assuming you have an OTP controller
+const { sendEmail } = require('../utils/sendEmail');
+
+const loginUser = async (req, res) => {
   try {
-    const existingUser = await userModel.findOne({ email: req.body.email });
-    if (existingUser) {
-      return res
-        .status(400)
-        .json({ msg: "Email already exists, please try again!" });
+    const { email } = req.body;
+
+    // Check if the email exists in the database
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found with this email' });
     }
-    const user = await userModel.create({
-      email: req.body.email,
-      phoneno: req.body.phoneno,
-      location: {
-        name: req.body.location,
-        lat: navigator.geolocation.latitude,
-        long: navigator.geolocation.longitude,
-      },
-    });
-    res.status(201).json({ msg: "User created successfully", user: user });
-  } catch (error) {
-    res.status(500).json({ msg: "Error creating user", error: error.message });
-  }
-};
 
-const LoginUser = async (req, res) => {
-  try {
-    const email = req.body.email;
-    const password = req.body.password;
-    const user = await userModel.findOne({ email: email });
-    if (!validPass)
-      return res
-        .status(401)
-        .json({ message: "Invalid login credentials! Please check it." });
+    // Send OTP to the user's email
+    const otpRecord = await sendOtp({ email });
 
-    let payload = { email: user.email };
-    const token = jwt.sign(payload, "SecretKey", { expiresIn: "1h" });
+    // You can return the OTP record or a success message
     res.status(200).json({
-      token: token,
-      email: email,
-      password: password,
-      role: user.role,
+      message: 'OTP sent to the email. Please verify to log in.',
+      otpRecord,
     });
+
   } catch (error) {
-    res
-      .status(200)
-      .json({ msg: "user login unsuccessful", error: error.message });
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error', error: error.message });
   }
 };
-module.exports = { SignUpuser, LoginUser };
+
+const verifyUserOtp = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    // Verify OTP
+    const isOtpValid = await verifyOTP({ email, otp });
+
+    if (isOtpValid) {
+      res.status(200).json({ message: 'OTP verified successfully. User logged in.' });
+    } else {
+      res.status(400).json({ message: 'Invalid or expired OTP' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'OTP verification failed', error: error.message });
+  }
+};
+
+module.exports = { loginUser, verifyUserOtp };

@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-const errorHandler = require("./middleware/errorHandling.js");
+const errorHandler = require("./middleware/errorhandling.js");
 
 const app = express();
 app.use(cors());
@@ -19,8 +19,9 @@ const donationRoutes = require("./Routes/donation.route.js");
 const requestRoutes = require("./Routes/request.route.js");
 const adminRoutes = require("./Routes/admin.route.js");
 const volunteerRoutes = require("./Routes/volunteer.route.js");
-const { validateToken } = require("./middleware/tokenvalidation");
-const SendRequestsRoutes = require("./Routes/sendRequests.route.js");
+const { validateToken } = require("./middleware/validateToken.js");
+const userRoutes  = require("./Routes/user.route.js")
+// const SendRequestsRoutes = require("./Routes/");
 
 mongoose
     .connect("mongodb://127.0.0.1:27017/food-bank")
